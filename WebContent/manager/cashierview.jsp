@@ -11,6 +11,7 @@
         integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="admin/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Com Bank</title>
 </head>
 
@@ -23,29 +24,39 @@
                     class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 ">
                     <a href="#"
                         class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline"><img src="assets/logo.png" width="60px" alt=""> Com Bank
+                        <span class="fs-5 d-none d-sm-inline"><img src="../assets/logo.png" width="60px" alt=""> Com
+                            Bank
                         </span>
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
                         <li class="nav-item">
                             <a href="dashboard.jsp" class="nav-link align-middle px-0 ">
-                                <i class="fs-4 bi-house"><img src="assets/dashboard.png" width="50px" alt=""></i> <span
-                                    class="ms-1 d-none d-sm-inline " style="color: white;">Dashboard</span>
+                                <i class="fs-4 bi-house"><img src="../assets/dashboard.png" width="50px" alt=""></i>
+                                <span class="ms-1 d-none d-sm-inline " style="color: white;">Dashboard</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="transactionWindow.jsp" class="nav-link align-middle px-0 ">
-                                <i class="fs-4 bi-house"><img src="assets/trans.png" width="50px" alt=""></i>
-                                <span class="ms-1 d-none d-sm-inline" style="color: white;">Transaction
+                                <i class="fs-4 bi-house"><img src="../assets/trans.png" width="50px" alt=""></i>
+                                <span class="ms-1 d-none d-sm-inline " style="color: white;">Transaction
                                     window
                                 </span>
                             </a>
                         </li>
                         <li>
                             <a href="userview.jsp" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-speedometer2"><img src="assets/profile.png" width="50px" alt=""></i>
-                                <span class="ms-1 d-none d-sm-inline" style="color: white;">Users</span> </a>
+                                <i class="fs-4 bi-speedometer2"><img src="../assets/profile.png" width="50px"
+                                        alt=""></i>
+                                <span class="ms-1 d-none d-sm-inline" style="color: white;">Customers</span> </a>
+
+                        </li>
+                        <li>
+                            <a href="userview.jsp" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-speedometer2"><img src="../assets/profile.png" width="50px"
+                                        alt=""></i>
+                                <span class="ms-1 d-none d-sm-inline aaactive" style="color: white;">Cashiers</span>
+                            </a>
 
                         </li>
 
@@ -54,7 +65,8 @@
                     <div class="dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="assets/avatar.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <img src="../assets/avatar.png" alt="hugenerd" width="30" height="30"
+                                class="rounded-circle">
                             <span class="d-none d-sm-inline mx-1">Logged Name</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
@@ -122,33 +134,30 @@
                     </div>
 
                     <button type="button" class="btn btn-danger float-end" onclick="showpassword()">
-                        Change Password
+                        Delete Account
                     </button>
 
                     <div class="ms-6 mb-5 mt-5" id="chgpwd" style="margin-left: 20%;display: none;">
-                        <div class="form-group mb-3">
-                            <label for="email1">Current Password</label>
-                            <input type="password" class="form-control" id="email1" aria-describedby="emailHelp"
-                                placeholder="Enter Current Password">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="password1">New Password</label>
-                            <input type="password" class="form-control" id="password1" placeholder="Password"
-                                pattern="/^.{6,}$/">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="password1">Confirm New Password</label>
-                            <input type="password" class="form-control" id="password2" placeholder="Confirm Password"
-                                pattern="/^.{6,}$/">
-                        </div>
-                        <div class=" border-top-0 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-success">Submit</button>
-                        </div>
+                        <form>
+                            <div class="form-group mb-3">
+                                <label for="password1">Admin Password</label>
+                                <input type="password" class="form-control" id="password1" placeholder="Password"
+                                    pattern="/^.{6,}$/">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="password1">Confirm Admin Password</label>
+                                <input type="password" class="form-control" id="password2"
+                                    placeholder="Confirm Password" pattern="/^.{6,}$/">
+                            </div>
+                            <div class=" border-top-0 d-flex justify-content-center">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
                     </div>
                 </div>
-
             </div>
+
         </div>
+    </div>
     </div>
 
 

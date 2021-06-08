@@ -10,7 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Com Bank</title>
 </head>
 
@@ -23,20 +24,21 @@
                     class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 ">
                     <a href="#"
                         class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline"><img src="assets/logo.png" width="60px" alt=""> Com Bank
+                        <span class="fs-5 d-none d-sm-inline"><img src="../assets/logo.png" width="60px" alt=""> Com
+                            Bank
                         </span>
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
                         <li class="nav-item">
-                            <a href="index.jsp" class="nav-link align-middle px-0 ">
-                                <i class="fs-4 bi-house"><img src="assets/dashboard.png" width="50px" alt=""></i> <span
-                                    class="ms-1 d-none d-sm-inline aaactive" style="color: white;">Dashboard</span>
+                            <a href="dashboard.jsp" class="nav-link align-middle px-0 ">
+                                <i class="fs-4 bi-house"><img src="../assets/dashboard.png" width="50px" alt=""></i>
+                                <span class="ms-1 d-none d-sm-inline " style="color: white;">Dashboard</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="transactionWindow.jsp" class="nav-link align-middle px-0 ">
-                                <i class="fs-4 bi-house"><img src="assets/trans.png" width="50px" alt=""></i>
+                                <i class="fs-4 bi-house"><img src="../assets/trans.png" width="50px" alt=""></i>
                                 <span class="ms-1 d-none d-sm-inline" style="color: white;">Transaction
                                     window
                                 </span>
@@ -44,8 +46,17 @@
                         </li>
                         <li>
                             <a href="userview.jsp" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-speedometer2"><img src="assets/profile.png" width="50px" alt=""></i>
-                                <span class="ms-1 d-none d-sm-inline" style="color: white;">Users</span> </a>
+                                <i class="fs-4 bi-speedometer2"><img src="../assets/profile.png" width="50px"
+                                        alt=""></i>
+                                <span class="ms-1 d-none d-sm-inline aaactive" style="color: white;">Customers</span>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a href="cashiers.jsp" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-speedometer2"><img src="../assets/profile.png" width="50px"
+                                        alt=""></i>
+                                <span class="ms-1 d-none d-sm-inline" style="color: white;">Cashiers</span> </a>
 
                         </li>
 
@@ -54,7 +65,8 @@
                     <div class="dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="assets/avatar.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <img src="../assets/avatar.png" alt="hugenerd" width="30" height="30"
+                                class="rounded-circle">
                             <span class="d-none d-sm-inline mx-1">Logged Name</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
@@ -67,56 +79,39 @@
 
         </div>
     </div>
-    <div style="min-height:92vh;" class="position-relative">
-        <div style="position: fixed;left: 18%">
-            <div class="row mx-auto ms-5">
-                <h3 class="mx-auto mt-5">Today Summary</h3>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body text-center text-l">
-                            <h5 class="card-title text-center">Deposits</h5>
-                            <p class="card-text fs-2">200</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Withdrawal</h5>
-                            <p class="card-text fs-2">150</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">New Customers</h5>
-                            <p class="card-text fs-2">180</p>
-                        </div>
-                    </div>
-                </div>
+    <div style="min-height:92vh;" class="d-block">
+        <div style="position: relative;left: 18%; width:70%">
+            <h2 class="d-flex mx-auto">Search User</h2>
+            <div class="input-group mb-3 ms-3 mt-5">
+                <input type=" text" class="form-control" placeholder="Account Number, Name, ID No"
+                    aria-label="Account Number" aria-describedby="button-addon2">
+                <button class="btn btn-outline-primary" type="button" id="button-addon2">🔍 Find</button>
             </div>
-            <h2 class="mx-auto mt-5">Last Transactions</h2>
-            <div class="mx-auto me-5">
-                <table class="table table-success table-striped me-md-auto">
+            <!--  View all before search -->
+            <div>
+                <table class="table table-striped table-hover ms-4">
                     <tr class="table-primary">
-                        <th>Tnx. Id</th>
-                        <th>Tnx. Date</th>
-                        <th>Acc. no</th>
-                        <th>Amount(Cr./<span class="text-danger">Dr.</span>)</th>
+                        <th>ID No.</th>
+                        <th>Acc. No</th>
+                        <th>Name</th>
+                        <th>Balance</th>
+                        <th>Action</th>
                     </tr>
                     <tr>
-                        <td>002</td>
-                        <td>2021/12/16</td>
-                        <td>01583694</td>
-                        <td class="text-danger">Rs. 250.00</td>
+                        <td>972580125v</td>
+                        <td>1598412</td>
+                        <td>K.M.L. Gamage</td>
+                        <td>Rs. 15,000.00</td>
+                        <td><a href="user.jsp?accno=1598412">View More</a></td>
                     </tr>
                     <tr>
-                        <td>002</td>
-                        <td>2021/12/16</td>
-                        <td>01583694</td>
-                        <td>Rs. 250.00</td>
+                        <td>972580125v</td>
+                        <td>1598412</td>
+                        <td>K.M.L. Gamage</td>
+                        <td>Rs. 15,000.00</td>
+                        <td><a href="user.jsp?accno=1598412">View More</a></td>
                     </tr>
+
                 </table>
             </div>
         </div>
