@@ -32,6 +32,20 @@ public class UserDAO {
 	    }
 		return null;
 	}
+	public ResultSet  userById(String id) {
+		PreparedStatement ps=null;
+	    String query="SELECT * FROM "+table+"  WHERE id = "+id+";";
+	    try {
+	        ps=connection.prepareStatement(query);
+	        ResultSet rs=ps.executeQuery();
+	        
+	            return rs;
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		return null;
+	}
 	
 	
 	public int GetTotCount() {
@@ -120,25 +134,7 @@ public class UserDAO {
 		return c;
 	}
 	
-//	public UserModel getUserData(String email) {
-//		
-//		PreparedStatement ps=null;
-//	    String query="SELECT email, type,password,fname,lname,tp  FROM "+table+" WHERE email LIKE '"+email+"';";
-//	    try {
-//	        ps=connection.prepareStatement(query);
-//	        ResultSet rs=ps.executeQuery();
-//	        	rs.next();
-//	        	
-//	        	UserModel uModel = new UserModel(rs.getString("email"),rs.getString("password"),rs.getString("fname"),rs.getString("lname"),rs.getInt("type"),rs.getString("tp"));
-//	        	rs.close();
-//	            return uModel;
-//	            
-//	        
-//	    } catch (SQLException e) {
-//	        e.printStackTrace();
-//	    }
-//		return null;
-//	}
+
 	
 	public boolean del(String name) {
 		PreparedStatement ps=null;

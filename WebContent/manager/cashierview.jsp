@@ -1,3 +1,11 @@
+<%@page import="DAO.UserDAO"%>
+<%@ page import="bank.DB"%>
+<%@ page import="java.sql.*"%>
+<%  DB obj_DB_Connection=new DB();
+  Connection connection=null;
+  connection=obj_DB_Connection.get_connection();
+  UserDAO DAO =new  UserDAO(connection);
+%>
 <!doctype html>
 <html lang="en">
 
@@ -30,67 +38,73 @@
                 </div>
 
                 <div class="tab-pane fade show active">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>User Id</label>
-                        </div>
-                        <div class="col-md-4">
-                            <p>0012</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Name</label>
-                        </div>
-                        <div class="col-md-4">
-                            <p>Kasun Bandara</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Email</label>
-                        </div>
-                        <div class="col-md-4">
-                            <p>Bandara@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Phone</label>
-                        </div>
-                        <div class="col-md-4">
-                            <p>0766344989</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Role</label>
-                        </div>
-                        <div class="col-md-4">
-                            <p>Cashier</p>
-                        </div>
-                    </div>
+                			<%
+								try {
+							    	ResultSet rs = DAO.userById("8");
+							    	
+									while(rs.next()) {
+										%>
+										
+											 <div class="row">
+					                        <div class="col-md-4">
+					                            <label>User Id</label>
+					                        </div>
+					                        <div class="col-md-4">
+					                            <p><% out.println(rs.getString("id")); %></p>
+					                        </div>
+					                    </div>
+					                    <div class="row">
+					                        <div class="col-md-4">
+					                            <label>Name</label>
+					                        </div>
+					                        <div class="col-md-4">
+					                            <p><% out.println(rs.getString("name")); %></p>
+					                        </div>
+					                    </div>
+					                    <div class="row">
+					                        <div class="col-md-4">
+					                            <label>Email</label>
+					                        </div>
+					                        <div class="col-md-4">
+					                            <p><% out.println(rs.getString("email")); %></p>
+					                        </div>
+					                    </div>
+					                    <div class="row">
+					                        <div class="col-md-4">
+					                            <label>Phone</label>
+					                        </div>
+					                        <div class="col-md-4">
+					                            <p>-</p>
+					                        </div>
+					                    </div>
+					                    <div class="row">
+					                        <div class="col-md-4">
+					                            <label>Role</label>
+					                        </div>
+					                        <div class="col-md-4">
+					                            <p><% if(rs.getString("type").equals("1")){
+					                            			out.println("Cashier");
+					                            		}else{
+					                            			out.println("Manager");
+					                            		}
+					                            	%></p>
+					                           
+					                        </div>
+					                    </div>
+					
+					                    <button type="button" class="btn btn-danger float-end" type="submit" >
+					                        Delete Account
+					                    </button>
 
-                    <button type="button" class="btn btn-danger float-end" onclick="showpassword()">
-                        Delete Account
-                    </button>
-
-                    <div class="ms-6 mb-5 mt-5" id="chgpwd" style="margin-left: 20%;display: none;">
-                        <form>
-                            <div class="form-group mb-3">
-                                <label for="password1">Admin Password</label>
-                                <input type="password" class="form-control" id="password1" placeholder="Password"
-                                    pattern="/^.{6,}$/">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="password1">Confirm Admin Password</label>
-                                <input type="password" class="form-control" id="password2"
-                                    placeholder="Confirm Password" pattern="/^.{6,}$/">
-                            </div>
-                            <div class=" border-top-0 d-flex justify-content-center">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                        </form>
-                    </div>
+                    
+										<%
+									}
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							%>
+                    
                 </div>
             </div>
 

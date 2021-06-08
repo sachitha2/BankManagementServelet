@@ -124,7 +124,7 @@
 						                        <td><% out.println(rs.getString("name")); %></td>
 						                        <td><% out.println(rs.getString("email")); %></td>
 						                        <td>-</td>
-						                        <td><a href="cashierview.jsp?id=1598412">View More</a></td>
+						                        <td><a href="cashierview.jsp?id=<% out.println(rs.getString("id")); %>">View More</a></td>
 						                    </tr>
 										<%
 									}
