@@ -108,8 +108,6 @@ body {
 							%>
 						</p>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <a href="register.jsp" class="text-decoration-none "><button class="mt-1 btn btn-lg btn-secondary btn-block" type="button">Register</button></a>
-      <a href="index.jsp"><h6 class="mt-2">Go Back Home</h6></a>
       <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
     </form>
     </body>

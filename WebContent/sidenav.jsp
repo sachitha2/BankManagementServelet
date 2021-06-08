@@ -1,5 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%
+
+String type=(String)session.getAttribute("type");
+if(type == null){
+	response.sendRedirect("login.jsp");
+}
+if(type != null && type.equals("1")){
+	response.sendRedirect("login.jsp");
+	%>
+	<h1>hellooo</h1>
+	<%
+}else{
+		
+	%>
+	<h1>hellooo elseeeee</h1>
+	<%
+}
+
+%>
 <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark "
