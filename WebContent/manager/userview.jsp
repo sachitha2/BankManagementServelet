@@ -53,9 +53,9 @@
 										
 											 <tr>
 						                        <td><% out.println(rs.getString("account_no")); %></td>
-						                        <td>Name here</td>
+						                        <td>Name here //TODO</td>
 						                        <td><% out.println(rs.getString("balance")); %></td>
-						                        <td><a href="user.jsp?id=<% out.println(rs.getString("customer_id")); %>">View More</a></td>
+						                        <td><a href="user.jsp?acc=<% out.println(rs.getString("account_no")); %>&customer=<% out.println(rs.getString("customer_id")); %>">View More</a></td>
 						                    </tr>
 										<%
 									}

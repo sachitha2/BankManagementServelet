@@ -70,33 +70,6 @@ public class AccountDAO {
 		return c;
 	}
 	
-	public int checkLogin(String email,String pass) {
-		int c = 0;
-		PreparedStatement ps=null;
-	    String query="SELECT COUNT(*) AS rowcount FROM "+table+" WHERE email LIKE '"+email+"' AND password LIKE '"+pass+"'";
-	    try {
-	        ps=connection.prepareStatement(query);
-	        ResultSet rs=ps.executeQuery();
-	        	rs.next();
-	        	
-	        	c = rs.getInt("rowcount");
-	        	
-	        	
-	        	
-	        	rs.close();
-	        	if(c == 1) {
-	        		c = userType(email,pass);
-	        		return c;
-	        	}else {
-	        		return 0;
-	        	}
-	            
-	        
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-		return c;
-	}
 	
 	public boolean addData(User user) {
 		PreparedStatement ps=null;
