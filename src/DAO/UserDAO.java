@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpSession;
 
-import Model.UserModel;
+import Model.User;
 
 public class UserDAO {
 	Connection connection=null;
@@ -83,21 +83,21 @@ public class UserDAO {
 		return c;
 	}
 	
-	public boolean addData(UserModel uModel) {
-		PreparedStatement ps=null;
-	    String query="INSERT INTO user (id, email, password, tp, type, profileImage, lname, fname) VALUES (NULL, '"+uModel.getEmail()+"', '"+uModel.getPassword()+"', '"+uModel.getTp()+"', '2', 'assets/profileimg.png', '"+uModel.getLname()+"', '"+uModel.getFname()+"');";
-	    try {
-	        ps=connection.prepareStatement(query);
-	        ps.executeUpdate();
-	        
-	            return true;
-	        
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-		
-		return false;
-	}
+//	public boolean addData(UserModel uModel) {
+//		PreparedStatement ps=null;
+//	    String query="INSERT INTO user (id, email, password, tp, type, profileImage, lname, fname) VALUES (NULL, '"+uModel.getEmail()+"', '"+uModel.getPassword()+"', '"+uModel.getTp()+"', '2', 'assets/profileimg.png', '"+uModel.getLname()+"', '"+uModel.getFname()+"');";
+//	    try {
+//	        ps=connection.prepareStatement(query);
+//	        ps.executeUpdate();
+//	        
+//	            return true;
+//	        
+//	    } catch (SQLException e) {
+//	        e.printStackTrace();
+//	    }
+//		
+//		return false;
+//	}
 	
 	public int userType(String email,String pass) {
 		int c = 0;
@@ -120,25 +120,25 @@ public class UserDAO {
 		return c;
 	}
 	
-	public UserModel getUserData(String email) {
-		
-		PreparedStatement ps=null;
-	    String query="SELECT email, type,password,fname,lname,tp  FROM "+table+" WHERE email LIKE '"+email+"';";
-	    try {
-	        ps=connection.prepareStatement(query);
-	        ResultSet rs=ps.executeQuery();
-	        	rs.next();
-	        	
-	        	UserModel uModel = new UserModel(rs.getString("email"),rs.getString("password"),rs.getString("fname"),rs.getString("lname"),rs.getInt("type"),rs.getString("tp"));
-	        	rs.close();
-	            return uModel;
-	            
-	        
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-		return null;
-	}
+//	public UserModel getUserData(String email) {
+//		
+//		PreparedStatement ps=null;
+//	    String query="SELECT email, type,password,fname,lname,tp  FROM "+table+" WHERE email LIKE '"+email+"';";
+//	    try {
+//	        ps=connection.prepareStatement(query);
+//	        ResultSet rs=ps.executeQuery();
+//	        	rs.next();
+//	        	
+//	        	UserModel uModel = new UserModel(rs.getString("email"),rs.getString("password"),rs.getString("fname"),rs.getString("lname"),rs.getInt("type"),rs.getString("tp"));
+//	        	rs.close();
+//	            return uModel;
+//	            
+//	        
+//	    } catch (SQLException e) {
+//	        e.printStackTrace();
+//	    }
+//		return null;
+//	}
 	
 	public boolean del(String name) {
 		PreparedStatement ps=null;
@@ -155,6 +155,4 @@ public class UserDAO {
 		return false;
 		
 	}
-		//TODO EDIT
-		//TODO Take a data from passing id
 }
