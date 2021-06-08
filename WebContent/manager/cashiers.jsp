@@ -1,3 +1,11 @@
+<%@page import="DAO.UserDAO"%>
+<%@ page import="bank.DB"%>
+<%@ page import="java.sql.*"%>
+<%  DB obj_DB_Connection=new DB();
+  Connection connection=null;
+  connection=obj_DB_Connection.get_connection();
+  UserDAO DAO =new  UserDAO(connection);
+%>
 <!doctype html>
 <html lang="en">
 
@@ -94,31 +102,39 @@
                 <button class="btn btn-outline-primary" type="button" id="button-addon2">🔍 Find</button>
             </div>
             <!--  View all before search -->
+            
             <div>
-                <table class="table table-striped table-hover ms-4">
-                    <tr class="table-primary">
-                        <th>ID No.</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr>
-                        <td>972580125v</td>
-                        <td>K.M.L. Gamage</td>
-                        <td>dum@gmail.com</td>
-                        <td>+94766344989</td>
-                        <td><a href="cashierview.jsp?id=1598412">View More</a></td>
-                    </tr>
-                    <tr>
-                        <td>972580125v</td>
-                        <td>K.M.L. Gamage</td>
-                        <td>dum@gmail.com</td>
-                        <td>+94766344989</td>
-                        <td><a href="cashierview.jsp?id=1598412">View More</a></td>
-                    </tr>
-
-                </table>
+            	<table class="table table-striped table-hover ms-4">
+            			<tr class="table-primary">
+	                        <th>ID</th>
+	                        <th>Name</th>
+	                        <th>Email</th>
+	                        <th>Phone</th>
+	                        <th>Action</th>
+                    	</tr>
+            				<%
+								try {
+							    	ResultSet rs = DAO.userList();
+							    	
+									while(rs.next()) {
+										%>
+										
+											 <tr>
+						                        <td><% out.println(rs.getString("id")); %></td>
+						                        <td><% out.println(rs.getString("name")); %></td>
+						                        <td><% out.println(rs.getString("email")); %></td>
+						                        <td>-</td>
+						                        <td><a href="cashierview.jsp?id=1598412">View More</a></td>
+						                    </tr>
+										<%
+									}
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							%>
+							</table>
+                
             </div>
         </div>
     </div>
