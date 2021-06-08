@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpSession;
 
+import Model.Customer;
 import Model.User;
 
 public class CustomerDAO {
@@ -33,20 +34,23 @@ public class CustomerDAO {
 	    }
 		return null;
 	}
-	public ResultSet  userById(String id) {
+	public Customer  GetACustomerById(String id) {
 		PreparedStatement ps=null;
 	    String query="SELECT * FROM "+table+"  WHERE id = "+id+";";
 	    try {
 	        ps=connection.prepareStatement(query);
 	        ResultSet rs=ps.executeQuery();
-	        
-	            return rs;
+	        	rs.next();
+	        	Customer customer = new Customer(rs.getInt("id"), rs.getString("email"), rs.getString("contact"), rs.getString("gender"), rs.getString("dob"), rs.getString("nic"), rs.getString("name"), rs.getString("address"));
+	            return customer;
 	        
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
 		return null;
 	}
+	
+	
 	
 	
 	public int GetTotCount() {

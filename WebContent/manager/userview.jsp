@@ -1,3 +1,4 @@
+<%@page import="Model.Customer"%>
 <%@page import="DAO.AccountDAO"%>
 <%@page import="DAO.CustomerDAO"%>
 <%@ page import="bank.DB"%>
@@ -6,6 +7,7 @@
   Connection connection=null;
   connection=obj_DB_Connection.get_connection();
   AccountDAO account = new AccountDAO(connection);
+  CustomerDAO customer = new CustomerDAO(connection);
 %>
 
 <!doctype html>
@@ -53,7 +55,12 @@
 										
 											 <tr>
 						                        <td><% out.println(rs.getString("account_no")); %></td>
-						                        <td>Name here //TODO</td>
+						                        <td>
+						                        	<%
+						                        		Customer  c = customer.GetACustomerById(rs.getString("customer_id"));
+						                        		out.print(c.getName());
+						                        	%>
+						                        </td>
 						                        <td><% out.println(rs.getString("balance")); %></td>
 						                        <td><a href="user.jsp?acc=<% out.println(rs.getString("account_no")); %>&customer=<% out.println(rs.getString("customer_id")); %>">View More</a></td>
 						                    </tr>
