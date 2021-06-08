@@ -32,7 +32,7 @@
 
                 <div class="col-md-4 mb-3 mx-auto">
                     <div class="profile-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+                        <img src="../profile.png"
                             alt="" />
                     </div>
                 </div>
