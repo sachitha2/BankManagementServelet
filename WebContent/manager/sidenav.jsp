@@ -1,19 +1,11 @@
 <%
 
 String type=(String)session.getAttribute("type");
-if(type == null){
-	response.sendRedirect("../index.jsp");
-}
+
 if(type != null && type.equals("2")){
-	response.sendRedirect("../index.jsp");
-	%>
-	<h1>hellooo</h1>
-	<%
+	
 }else{
-		
-	%>
-	<h1>hellooo elseeeee</h1>
-	<%
+	response.sendRedirect("../login.jsp");
 }
 
 %>
@@ -27,7 +19,7 @@ if(type != null && type.equals("2")){
                     <a href="#"
                         class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="fs-5 d-none d-sm-inline"><img src="../assets/logo.png" width="60px" alt=""> Com
-                            Bank
+                            Bank fff <% out.print(type); %>
                         </span>
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"

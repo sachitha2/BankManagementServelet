@@ -1,19 +1,10 @@
 <%
 
 String type=(String)session.getAttribute("type");
-if(type == null){
-	response.sendRedirect("login.jsp");
-}
 if(type != null && type.equals("1")){
-	response.sendRedirect("login.jsp");
-	%>
-	<h1>hellooo</h1>
-	<%
+	
 }else{
-		
-	%>
-	<h1>hellooo elseeeee</h1>
-	<%
+	response.sendRedirect("login.jsp");
 }
 
 %>

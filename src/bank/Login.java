@@ -1,4 +1,5 @@
-package ticket;
+package bank;
+
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -38,12 +39,12 @@ public class Login extends HttpServlet {
 			HttpSession session =  request.getSession();
 			session.setAttribute("email", email);
 			session.setAttribute("type", "1");
-			response.sendRedirect("admin/index.jsp");
+			response.sendRedirect("index.jsp");
 		}else if (login.checkLogin(email, pass) == 2){
 			HttpSession session =  request.getSession();
 			session.setAttribute("email", email);
 			session.setAttribute("type", "2");
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("manager/index.jsp");
 		}
 		else {
 			response.sendRedirect("login.jsp?err=e");
@@ -53,3 +54,4 @@ public class Login extends HttpServlet {
 
 	
 }
+
