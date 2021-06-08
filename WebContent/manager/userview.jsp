@@ -1,3 +1,13 @@
+<%@page import="DAO.AccountDAO"%>
+<%@page import="DAO.CustomerDAO"%>
+<%@ page import="bank.DB"%>
+<%@ page import="java.sql.*"%>
+<%  DB obj_DB_Connection=new DB();
+  Connection connection=null;
+  connection=obj_DB_Connection.get_connection();
+  AccountDAO account = new AccountDAO(connection);
+%>
+
 <!doctype html>
 <html lang="en">
 
@@ -29,27 +39,31 @@
             <div>
                 <table class="table table-striped table-hover ms-4">
                     <tr class="table-primary">
-                        <th>ID No.</th>
                         <th>Acc. No</th>
                         <th>Name</th>
                         <th>Balance</th>
                         <th>Action</th>
                     </tr>
-                    <tr>
-                        <td>972580125v</td>
-                        <td>1598412</td>
-                        <td>K.M.L. Gamage</td>
-                        <td>Rs. 15,000.00</td>
-                        <td><a href="user.jsp?accno=1598412">View More</a></td>
-                    </tr>
-                    <tr>
-                        <td>972580125v</td>
-                        <td>1598412</td>
-                        <td>K.M.L. Gamage</td>
-                        <td>Rs. 15,000.00</td>
-                        <td><a href="user.jsp?accno=1598412">View More</a></td>
-                    </tr>
-
+                    <%
+								try {
+							    	ResultSet rs = account.list();
+							    	
+									while(rs.next()) {
+										%>
+										
+											 <tr>
+						                        <td><% out.println(rs.getString("account_no")); %></td>
+						                        <td>Name here</td>
+						                        <td><% out.println(rs.getString("balance")); %></td>
+						                        <td><a href="user.jsp?id=<% out.println(rs.getString("customer_id")); %>">View More</a></td>
+						                    </tr>
+										<%
+									}
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							%>
                 </table>
             </div>
         </div>
