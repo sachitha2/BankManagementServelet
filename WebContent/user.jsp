@@ -1,3 +1,17 @@
+<%@page import="Model.Customer"%>
+<%@page import="DAO.AccountDAO"%>
+<%@page import="DAO.CustomerDAO"%>
+<%@ page import="bank.DB"%>
+<%@ page import="java.sql.*"%>
+<%  DB obj_DB_Connection=new DB();
+  Connection connection=null;
+  connection=obj_DB_Connection.get_connection();
+  AccountDAO account = new AccountDAO(connection);
+  CustomerDAO customer = new CustomerDAO(connection);
+  Customer  c = customer.GetACustomerById(request.getParameter("customer"));
+%>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -82,20 +96,21 @@
                                 class="textnorm">135012369</span></span></div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-sm-4"><span class="h4">First Name: <span class="textnorm">Dumidu Kasun</span></span>
+                    <div class="col-sm-4"><span class="h4">First Name: <span class="textnorm"><% out.print(c.getName()); %></span></span>
                     </div>
-                    <div class="col-sm-4"><span class="h4">Last Name: <span class="textnorm">Bandara</span></span></div>
-                    <div class="col-sm-4"><span class="h4">ID No. <span class="textnorm">982587152V</span></span></div>
+                    <div class="col-sm-4"><span class="h4"></div>
+                    <div class="col-sm-4"><span class="h4">ID No. <span class="textnorm"><% out.print(c.getNic()); %></span></span></div>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-sm"><span class="h5">DOB: <span class="textnorm">1995-10-15</span></span></div>
-                    <div class="col-sm"><span class="h5">Gender: <span class="textnorm">Male</span></span></div>
+                    <div class="col-sm"><span class="h5">DOB: <span class="textnorm"><% out.print(c.getDob()); %></span></span></div>
+                    <div class="col-sm"><span class="h5">Gender: <span class="textnorm"><% out.print(c.getGender()); %></span></span></div>
                     <div class="col-sm"><span class="h5">Acc. Type: <span class="textnorm">Savings</span></span></div>
-                    <div class="col-sm"><span class="h5">Email: <span class="textnorm">-</span></span></div>
+                    <div class="col-sm"><span class="h5">Email: <span class="textnorm"><% out.print(c.getEmail()); %></span></span></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-sm"><span class="h5">Address:
-                            <textarea class="form-control" rows="3">Abaya Road,.&#13;&#10;Galpalama.&#13;&#10;Anuradhapura
+                            <textarea class="form-control" rows="3">
+                            	<% out.print(c.getAddress()); %>
                             </textarea>
                     </div>
                 </div>

@@ -65,7 +65,7 @@ if(type != null && type.equals("2")){
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                             <li><a class="dropdown-item" href="profile.jsp">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            <li><a class="dropdown-item" href="../Logout">Sign out</a></li>
                         </ul>
                     </div>
                 </div>
