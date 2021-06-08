@@ -67,7 +67,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form action="../AddCustomer" method="get">
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-md-4">
