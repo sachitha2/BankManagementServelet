@@ -29,7 +29,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form action="../AddUser" method="post">
                                 <!-- TODO -->
                                 <div class="container-fluid">
                                     <div class="row">
@@ -69,12 +69,12 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="recipient-pwd" class="col-form-label">Password</label>
-                                            <input type="text" class="form-control inpwidth" id="recipient-pwd">
+                                            <input type="text" class="form-control inpwidth" name="pwd" id="recipient-pwd">
                                         </div>
                                         <div class="col-md-4 ms-auto">
                                             <label for="recipient-mobile" class="col-form-label">Confirm
                                                 Password</label>
-                                            <input type="text" class="form-control inpwidth" name="pwd"
+                                            <input type="text" class="form-control inpwidth" name="pwda"
                                                 id="recipient-cpwd">
                                         </div>
                                     </div>
