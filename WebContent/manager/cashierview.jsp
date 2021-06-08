@@ -40,7 +40,7 @@
                 <div class="tab-pane fade show active">
                 			<%
 								try {
-							    	ResultSet rs = DAO.userById("8");
+							    	ResultSet rs = DAO.userById(request.getParameter("id"));
 							    	
 									while(rs.next()) {
 										%>
@@ -91,10 +91,13 @@
 					                           
 					                        </div>
 					                    </div>
-					
-					                    <button type="button" class="btn btn-danger float-end" type="submit" >
-					                        Delete Account
-					                    </button>
+										<form action="../DelUser" method="get">
+											<input type="text" value="<% out.println(rs.getString("id")); %>" name="id" readonly="readonly"  style="display:none"/>
+											<button class="btn btn-danger float-end" type="submit" >
+					                        	Delete Account
+					                   		 </button>
+										</form>
+					                    
 
                     
 										<%

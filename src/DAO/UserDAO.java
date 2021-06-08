@@ -138,7 +138,7 @@ public class UserDAO {
 	
 	public boolean del(String name) {
 		PreparedStatement ps=null;
-	    String query="DELETE FROM user WHERE user.username = "+name+";";
+	    String query="DELETE FROM user WHERE user.id = "+name+";";
 	    try {
 	        ps=connection.prepareStatement(query);
 	        ps.executeUpdate();
