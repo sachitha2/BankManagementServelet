@@ -1,6 +1,6 @@
 <%@page import="DAO.BookingDAO"%>
 <%@page import="DAO.ShowTimeDAO"%>
-<%@page import="Model.Film"%>
+
 <%@ page import="DAO.FilmDAO"%>
 <%@ page import="ticket.DB"%>
 <%@ page import="java.sql.*"%>
