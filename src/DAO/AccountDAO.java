@@ -72,20 +72,23 @@ public class AccountDAO {
 	}
 	
 	
-	public boolean addData(Account account) {
+	public int addData(Account account) {
 		PreparedStatement ps=null;
 	    String query="INSERT INTO account (account_no, account_type, balance, initial_deposit, customer_nic) VALUES (NULL, '"+account.getAccount_type()+"', '"+account.getBalance()+"', '"+account.getBalance()+"', '"+account.getCustomer_nic()+"');";
 	    try {
-	        ps=connection.prepareStatement(query);
+	    	
+	        String autogenColumns[] = {"account_no"};
+	   	    ps=connection.prepareStatement(query, autogenColumns);
 	        ps.executeUpdate();
-	        
-	            return true;
+	        ResultSet rs = ps.getGeneratedKeys();
+    	    rs.next();
+    	    return rs.getInt(1);
 	        
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
 		
-		return false;
+		return 0;
 	}
 	
 	public int userType(String email,String pass) {

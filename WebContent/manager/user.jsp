@@ -10,6 +10,8 @@
   CustomerDAO customer = new CustomerDAO(connection);
   String customerNic = request.getParameter("customer");
   Customer customerData = customer.GetACustomerByNIC(customerNic);
+  
+  
  
 %>
 <!doctype html>

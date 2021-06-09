@@ -50,7 +50,7 @@ public class AddCustomer extends HttpServlet {
 			if(customerDAO.addData(customer)){
 		    	out.println("parameters ok");
 		    	//Create new account after adding new customer
-		    	if(accountDAO.addData(account)) {
+		    	if(accountDAO.addData(account) != 0) {
 		    		response.sendRedirect("manager/index.jsp");
 		    	}else {
 		    		response.sendRedirect("manager/index.jsp?err=Account create failed");
