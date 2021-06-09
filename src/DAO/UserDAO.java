@@ -151,4 +151,20 @@ public class UserDAO {
 		return false;
 		
 	}
+	
+	public ResultSet  userByemail(String id) {
+		PreparedStatement ps=null;
+	    String query="SELECT * FROM "+table+"  WHERE email = '"+id+"';";
+	    try {
+	        ps=connection.prepareStatement(query);
+	        ResultSet rs=ps.executeQuery();
+	        
+	            return rs;
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		return null;
+	}
+	
 }

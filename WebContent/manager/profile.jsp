@@ -1,3 +1,12 @@
+<%@page import="DAO.UserDAO"%>
+<%@ page import="bank.DB"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="javax.servlet.http.HttpSession"%>
+<%  DB obj_DB_Connection=new DB();
+  Connection connection=null;
+  connection=obj_DB_Connection.get_connection();
+  UserDAO DAO =new  UserDAO(connection);
+%>
 <!doctype html>
 <html lang="en">
 
@@ -11,7 +20,6 @@
         integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="admin/style.css">
-    <link rel="stylesheet" href="../css/style.css">
     <title>Com Bank</title>
 </head>
 
@@ -24,18 +32,25 @@
 
                 <div class="col-md-4 mb-3 mx-auto">
                     <div class="profile-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-                            alt="" />
+                        <!--  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+                            alt="" />-->
                     </div>
                 </div>
-
+<%		
+						HttpSession sess =  request.getSession();
+						
+								try {
+							    	ResultSet rs = DAO.userByemail((String) sess.getAttribute("email"));
+							    	
+									while(rs.next()) {
+									%>
                 <div class="tab-pane fade show active">
                     <div class="row">
                         <div class="col-md-4">
                             <label>User Id</label>
                         </div>
                         <div class="col-md-4">
-                            <p>0012</p>
+                            <p>0<% out.println(rs.getString("id")); %></p>
                         </div>
                     </div>
                     <div class="row">
@@ -43,7 +58,7 @@
                             <label>Name</label>
                         </div>
                         <div class="col-md-4">
-                            <p>Kasun Bandara</p>
+                            <p><% out.println(rs.getString("name")); %></p>
                         </div>
                     </div>
                     <div class="row">
@@ -51,18 +66,10 @@
                             <label>Email</label>
                         </div>
                         <div class="col-md-4">
-                            <p>Bandara@gmail.com</p>
+                            <p><% out.println(rs.getString("email")); %></p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Phone</label>
-                        </div>
-                        <div class="col-md-4">
-                            <p>0766344989</p>
-                        </div>
-                    </div>
-                    <div class="row">
+                     <div class="row">
                         <div class="col-md-4">
                             <label>Role</label>
                         </div>
@@ -71,9 +78,11 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-danger float-end" onclick="showpassword()">
+                    <!-- 
+                    	<button type="button" class="btn btn-danger float-end" onclick="showpassword()">
                         Change Password
                     </button>
+                     -->
 
                     <div class="ms-6 mb-5 mt-5" id="chgpwd" style="margin-left: 20%;display: none;">
                         <div class="form-group mb-3">
@@ -96,7 +105,13 @@
                         </div>
                     </div>
                 </div>
-
+<%
+									}
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							%>
             </div>
         </div>
     </div>
@@ -109,7 +124,7 @@
     <footer class="bg-light text-center text-lg-start">
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            Â© 2021 Copyright:
+            © 2021 Copyright:
             <a class="text-dark" href="https://combank.lk/">Com Bank</a>
         </div>
         <!-- Copyright -->
