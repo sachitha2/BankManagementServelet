@@ -8,6 +8,7 @@
   connection=obj_DB_Connection.get_connection();
   AccountDAO account = new AccountDAO(connection);
   CustomerDAO customer = new CustomerDAO(connection);
+  
 %>
 
 <!doctype html>
@@ -57,12 +58,15 @@
 						                        <td><% out.println(rs.getString("account_no")); %></td>
 						                        <td>
 						                        	<%
-						                        		Customer  c = customer.GetACustomerById(rs.getString("customer_id"));
-						                        		out.print(c.getName());
+						                        		Customer  c = customer.GetACustomerByNIC(rs.getString("customer_nic"));
+						                        		if(c != null){
+						                        			out.print(c.getName());
+						                        		}
+						                        		
 						                        	%>
 						                        </td>
 						                        <td><% out.println(rs.getString("balance")); %></td>
-						                        <td><a href="user.jsp?acc=<% out.println(rs.getString("account_no")); %>&customer=<% out.println(rs.getString("customer_id")); %>">View More</a></td>
+						                        <td><a href="user.jsp?acc=<% out.println(rs.getString("account_no")); %>&customer=<% out.println(rs.getString("customer_nic")); %>">View More</a></td>
 						                    </tr>
 										<%
 									}
