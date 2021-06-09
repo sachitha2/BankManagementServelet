@@ -34,14 +34,21 @@ public class AccountDAO {
 	    }
 		return null;
 	}
-	public ResultSet  userById(String id) {
+	public Account  accountByAccId(String id) {
 		PreparedStatement ps=null;
-	    String query="SELECT * FROM "+table+"  WHERE id = "+id+";";
+	    String query="SELECT * FROM "+table+"  WHERE account_no = "+id+";";
 	    try {
 	        ps=connection.prepareStatement(query);
 	        ResultSet rs=ps.executeQuery();
+	        rs.next();
+	        int account_no =rs.getInt("account_no");  
+	        String account_type = rs.getString("account_type");
+	    	float balance = rs.getFloat("balance");
+	    	float initial_deposit = rs.getFloat("initial_deposit");
+	    	String customer_nic = rs.getString("customer_nic");
 	        
-	            return rs;
+	    	Account account = new Account(account_no, account_type, balance, initial_deposit, customer_nic);
+	        return account;
 	        
 	    } catch (SQLException e) {
 	        e.printStackTrace();

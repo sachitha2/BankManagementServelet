@@ -1,3 +1,22 @@
+<%@page import="Model.Account"%>
+<%@page import="DAO.TransactionDAO"%>
+<%@page import="Model.Customer"%>
+<%@page import="DAO.AccountDAO"%>
+<%@page import="DAO.CustomerDAO"%>
+<%@ page import="bank.DB"%>
+<%@ page import="java.sql.*"%>
+<%  DB obj_DB_Connection=new DB();
+  Connection connection=null;
+  connection=obj_DB_Connection.get_connection();
+  AccountDAO accountDAO = new AccountDAO(connection);
+  CustomerDAO customerDAO = new CustomerDAO(connection);
+  String acc = request.getParameter("acc");
+  //Customer customerData = customer.GetACustomerByNIC(customerNic);
+ Account account = accountDAO.accountByAccId(acc);
+ 
+ 
+%>
+
 <!doctype html>
 <html lang="en">
 
@@ -20,32 +39,46 @@
     <div style="min-height:92vh;" class="d-block">
         <div style="position: relative;left: 18%; width:70%">
             <h2 class="d-flex mx-auto">Transaction Window</h2>
+            <form action="" method="get">
             <div class="input-group mb-3 ms-3 mt-3">
-                <input type=" text" class="form-control" placeholder="Account Number" aria-label="Account Number"
-                    aria-describedby="button-addon2">
-                <button class="btn btn-outline-primary" type="button" id="button-addon2">🔍 Find</button>
+                
+	                <input type=" text" class="form-control" placeholder="Account Number" aria-label="Account Number" name="acc"
+	                    aria-describedby="button-addon2">
+	                <button class="btn btn-outline-primary" type="submit" id="button-addon2">🔍 Find</button>
+                
+                
             </div>
-            <!--  open only after submitting the acc no -->
+            </form>
+            
+            <%
+            	if(acc != null && acc != ""){
+            		//check acc availability here
+            		if(account != null){
+            			Customer customer = customerDAO.GetACustomerByNIC(account.getCustomer_nic());
+            		%>
+            		<!--  open only after submitting the acc no -->
             <div>
                 <div class="row mb-3">
-                    <div class="col-sm" style="margin-left:40%"><span class="h5">Acc. No<span
-                                class="textnorm">135012369</span></span></div>
+                    <div class="col-sm" style="margin-left:40%"><span class="h5">Acc. No <span
+                                class="textnorm"> <% out.println(acc); %></span></span></div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-sm-4"><span class="h4">First Name: <span class="textnorm">Dumidu Kasun</span></span>
+                    <div class="col-sm-4"><span class="h4">First Name: <span class="textnorm"><% out.println(customer.getName()); %></span></span>
                     </div>
-                    <div class="col-sm-4"><span class="h4">Last Name: <span class="textnorm">Bandara</span></span></div>
-                    <div class="col-sm-4"><span class="h4">ID No. <span class="textnorm">982587152V</span></span></div>
+                    <div class="col-sm-4"><span class="h4"></div>
+                    <div class="col-sm-4"><span class="h4">ID No. <span class="textnorm"><% out.println(customer.getNic()); %></span></span></div>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-sm"><span class="h5">DOB: <span class="textnorm">1995-10-15</span></span></div>
-                    <div class="col-sm"><span class="h5">Gender: <span class="textnorm">Male</span></span></div>
-                    <div class="col-sm"><span class="h5">Acc. Type: <span class="textnorm">Savings</span></span></div>
+                    <div class="col-sm"><span class="h5">DOB: <span class="textnorm"><% out.println(customer.getDob()); %></span></span></div>
+                    <div class="col-sm"><span class="h5">Gender: <span class="textnorm"><% out.println(customer.getGender()); %></span></span></div>
+                    <div class="col-sm"><span class="h5">Acc. Type: <span class="textnorm"><% out.println(account.getAccount_type()); %></span></span></div>
                     <div class="col-sm"><span class="h5">Email: <span class="textnorm">-</span></span></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-sm"><span class="h5">Address:
-                            <textarea class="form-control" rows="3">Abaya Road,.&#13;&#10;Galpalama.&#13;&#10;Anuradhapura
+                            <textarea class="form-control" rows="3">
+                            
+                            <% out.println(customer.getAddress()); %>
                             </textarea>
                     </div>
                 </div>
@@ -95,6 +128,11 @@
                     </div>
                 </form>
             </div>
+            		<%
+            		}
+            	}
+            %>
+            
         </div>
     </div>
     <footer class="bg-light text-center text-lg-start">
