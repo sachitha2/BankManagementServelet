@@ -1,3 +1,4 @@
+<%@page import="DAO.TransactionDAO"%>
 <%@page import="Model.Customer"%>
 <%@page import="DAO.AccountDAO"%>
 <%@page import="DAO.CustomerDAO"%>
@@ -9,9 +10,10 @@
   AccountDAO account = new AccountDAO(connection);
   CustomerDAO customer = new CustomerDAO(connection);
   String customerNic = request.getParameter("customer");
+  String acc = request.getParameter("acc");
   Customer customerData = customer.GetACustomerByNIC(customerNic);
   
-  
+  TransactionDAO transactionDAO = new TransactionDAO(connection);
  
 %>
 <!doctype html>
@@ -80,41 +82,38 @@
                             <th>Amount(Cr./<span class="text-danger">Dr.</span>)</th>
                             <th>Balance</th>
                         </tr>
-                        <tr>
-                            <td>002</td>
-                            <td>2021/12/16</td>
-                            <td>01583694</td>
-                            <td class="text-danger">Rs. 250.00</td>
-                            <td>Rs.2500</td>
-                        </tr>
-                        <tr>
-                            <td>002</td>
-                            <td>2021/12/16</td>
-                            <td>01583694</td>
-                            <td>Rs. 250.00</td>
-                            <td>Rs.1500</td>
-                        </tr>
-                        <tr>
-                            <td>002</td>
-                            <td>2021/12/16</td>
-                            <td>01583694</td>
-                            <td class="text-danger">Rs. 250.00</td>
-                            <td>Rs.2500</td>
-                        </tr>
-                        <tr>
-                            <td>002</td>
-                            <td>2021/12/16</td>
-                            <td>01583694</td>
-                            <td>Rs. 250.00</td>
-                            <td>Rs.1500</td>
-                        </tr>
-                        <tr>
-                            <td>002</td>
-                            <td>2021/12/16</td>
-                            <td>01583694</td>
-                            <td class="text-danger">Rs. 250.00</td>
-                            <td>Rs.2500</td>
-                        </tr>
+                       <%
+								try {
+							    	ResultSet rs = transactionDAO.listTransactionsOfaAccount(acc);
+							    	
+									while(rs.next()) {
+										%>
+										
+												  <tr>
+							                        <td><% out.println(rs.getString("t_id")); %></td>
+							                        <td><% out.println(rs.getString("date")); %></td>
+							                        <td><% out.println(rs.getString("account_id")); %></td>
+							                        <td>Rs. <% 
+							                        	if(rs.getFloat("amount") < 0){
+							                        		%>
+							                        		<strong style="color:red"><% out.println(rs.getString("amount")); %></strong>
+							                        		<%
+							                        		
+							                        	}else{
+							                        		%>
+							                        		<strong style="color:green"><% out.println(rs.getString("amount")); %></strong>
+							                        		<%
+							                        	}
+							                        %></td>
+							                        <td><% out.println(rs.getString("user_id")); %></td>
+							                    </tr>
+										<%
+									}
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							%>
                     </table>
                 </div>
             </div>

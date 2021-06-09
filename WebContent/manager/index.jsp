@@ -236,7 +236,7 @@
                         <th>Amount(Cr./<span class="text-danger">Dr.</span>)</th>
                         <th>cashier ID</th>
                     </tr>
-                     <%
+                     	<%
 								try {
 							    	ResultSet rs = transactionDAO.listLastTen();
 							    	

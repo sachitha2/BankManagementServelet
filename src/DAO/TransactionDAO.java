@@ -50,6 +50,21 @@ public class TransactionDAO {
 	    }
 		return null;
 	}
+	
+	public ResultSet  listTransactionsOfaAccount(String accId) {
+		PreparedStatement ps=null;
+	    String query="SELECT * FROM "+table+" WHERE account_id = "+accId+" ORDER BY date and time;";
+	    try {
+	        ps=connection.prepareStatement(query);
+	        ResultSet rs=ps.executeQuery();
+	        
+	            return rs;
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		return null;
+	}
 	public Customer  GetACustomerById(String id) {
 		PreparedStatement ps=null;
 	    String query="SELECT * FROM "+table+"  WHERE id = "+id+";";
