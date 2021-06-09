@@ -8,9 +8,10 @@
   Connection connection=null;
   connection=obj_DB_Connection.get_connection();
   TransactionDAO transactionDAO = new TransactionDAO(connection);
-  
+  AccountDAO account = new AccountDAO(connection);
   
 %>
+
 <!doctype html>
 <html lang="en">
 
@@ -35,7 +36,7 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center text-l">
                             <h5 class="card-title text-center">Deposits</h5>
-                            <p class="card-text fs-2">200</p>
+                            <p class="card-text fs-2"><% out.print(account.statdep()); %></p>
                         </div>
                     </div>
                 </div>
@@ -43,7 +44,7 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center">
                             <h5 class="card-title">Withdrawal</h5>
-                            <p class="card-text fs-2">150</p>
+                            <p class="card-text fs-2"><% out.print(account.statwith()); %></p>
                         </div>
                     </div>
                 </div>

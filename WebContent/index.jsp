@@ -52,7 +52,7 @@
                 <div class="col">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center">
-                            <h5 class="card-title">New Customers</h5>
+                            <h5 class="card-title">Customers</h5>
                             <p class="card-text fs-2">180</p>
                         </div>
                     </div>

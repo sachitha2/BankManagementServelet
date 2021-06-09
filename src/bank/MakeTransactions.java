@@ -49,17 +49,18 @@ public class MakeTransactions extends HttpServlet {
 				
 				int accounntId =Integer.parseInt(request.getParameter("acc")) ;
 				String d = request.getParameter("deposit");
-				String type = "";
+					int type;
 					if(d.equals("deposit")) {
-						type = "1";
+						type = 1;
 					}else {
 						amount= 0 - amount;
-						type = "2";
+						type = 2;
 					}
-		    	 
+					
+					
 				
 		    	
-					Transaction transaction = new Transaction(0, 1, amount, "", "", accounntId, "12");
+					Transaction transaction = new Transaction(0, type, amount, "", "", accounntId, "12");
 					
 		    		
 		    		if(transactionDAO.addData(transaction)) {
