@@ -1,3 +1,17 @@
+<%@page import="Model.Customer"%>
+<%@page import="DAO.AccountDAO"%>
+<%@page import="DAO.CustomerDAO"%>
+<%@ page import="bank.DB"%>
+<%@ page import="java.sql.*"%>
+<%  DB obj_DB_Connection=new DB();
+  Connection connection=null;
+  connection=obj_DB_Connection.get_connection();
+  AccountDAO account = new AccountDAO(connection);
+  CustomerDAO customer = new CustomerDAO(connection);
+  String customerNic = request.getParameter("customer");
+  Customer customerData = customer.GetACustomerByNIC(customerNic);
+ 
+%>
 <!doctype html>
 <html lang="en">
 
@@ -14,16 +28,15 @@
     <title>Com Bank</title>
 </head>
 
-<body>
+<body style="overflow-x: hidden;">
     <%@include file="sidenav.jsp" %>
+    <%
+     	if(customerData !=null){
+	 %>
     <div style="min-height:92vh;" class="d-block">
-        <div style="position: fixed;left: 18%; width:70%">
-            <h2 class="d-flex mx-auto">Search User</h2>
-            <div class="input-group mb-3 ms-3 mt-5">
-                <input type=" text" class="form-control" placeholder="Account Number, Name, ID No"
-                    aria-label="Account Number" aria-describedby="button-addon2">
-                <button class="btn btn-outline-primary" type="button" id="button-addon2">🔍 Find</button>
-            </div>
+        <div style="position: relative;margin-right: 5px;margin-left: 18%; ">
+            <h2 class="d-flex mx-auto">User View</h2>
+            
             <!--  open only after submitting the acc no -->
             <div>
                 <div class="row mb-3">
@@ -31,20 +44,20 @@
                                 class="textnorm">135012369</span></span></div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-sm-4"><span class="h4">First Name: <span class="textnorm">Dumidu Kasun</span></span>
+                    <div class="col-sm-4"><span class="h4">First Name: <span class="textnorm"><% out.print(customerData.getName()); %></span></span>
                     </div>
-                    <div class="col-sm-4"><span class="h4">Last Name: <span class="textnorm">Bandara</span></span></div>
-                    <div class="col-sm-4"><span class="h4">ID No. <span class="textnorm">982587152V</span></span></div>
+                   
+                    <div class="col-sm-4"><span class="h4">ID No. <span class="textnorm"><% out.print(customerData.getNic()); %></span></span></div>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-sm"><span class="h5">DOB: <span class="textnorm">1995-10-15</span></span></div>
-                    <div class="col-sm"><span class="h5">Gender: <span class="textnorm">Male</span></span></div>
+                    <div class="col-sm"><span class="h5">DOB: <span class="textnorm"><% out.print(customerData.getDob()); %></span></span></div>
+                    <div class="col-sm"><span class="h5">Gender: <span class="textnorm"><% out.print(customerData.getGender()); %></span></span></div>
                     <div class="col-sm"><span class="h5">Acc. Type: <span class="textnorm">Savings</span></span></div>
-                    <div class="col-sm"><span class="h5">Email: <span class="textnorm">-</span></span></div>
+                    <div class="col-sm"><span class="h5">Email: <span class="textnorm"><% out.print(customerData.getEmail()); %></span></span></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-sm"><span class="h5">Address:
-                            <textarea class="form-control" rows="3">Abaya Road,.&#13;&#10;Galpalama.&#13;&#10;Anuradhapura
+                            <textarea class="form-control" rows="3"><% out.print(customerData.getAddress()); %>
                             </textarea>
                     </div>
                 </div>
@@ -53,34 +66,67 @@
                                 class="textnormh2">Rs.5,000.00</span></span>
                     </div>
                 </div>
-                <form method="POST" action="">
-                    <div class="row ms-5 mt-3">
-                        <div class="form-check col-sm">
-                            <input class="form-check-input" type="radio" name="transaction_type" id="flexRadioDefault1"
-                                checked>
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Deposit
-                            </label>
-                        </div>
-                        <div class="form-check col-sm">
-                            <input class="form-check-input" type="radio" name="transaction_type" id="flexRadioDefault2">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                Withdrawal
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row ms-5 mt-3">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Amount - Rs.</span>
-                            <input type="number" min="1" class="form-control" placeholder="Amount 500.00"
-                                aria-label="Username" aria-describedby="basic-addon1">
-                        </div>
-                        <input type="submit" class="btn btn-primary active" aria-current="page"
-                            value="Complete Transaction">
-                    </div>
-                </form>
+                <div class="mx-auto me-5 mt-5">
+                    <h3 class="mt-1 mb-3">Transactions</h3>
+                    <table class="table table-success table-striped me-md-auto">
+                        <tr class="table-primary">
+                            <th>Tnx. Id</th>
+                            <th>Tnx. Date</th>
+                            <th>Acc. no</th>
+                            <th>Amount(Cr./<span class="text-danger">Dr.</span>)</th>
+                            <th>Balance</th>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>2021/12/16</td>
+                            <td>01583694</td>
+                            <td class="text-danger">Rs. 250.00</td>
+                            <td>Rs.2500</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>2021/12/16</td>
+                            <td>01583694</td>
+                            <td>Rs. 250.00</td>
+                            <td>Rs.1500</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>2021/12/16</td>
+                            <td>01583694</td>
+                            <td class="text-danger">Rs. 250.00</td>
+                            <td>Rs.2500</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>2021/12/16</td>
+                            <td>01583694</td>
+                            <td>Rs. 250.00</td>
+                            <td>Rs.1500</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>2021/12/16</td>
+                            <td>01583694</td>
+                            <td class="text-danger">Rs. 250.00</td>
+                            <td>Rs.2500</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
+        <% 
+  	}else{
+  		
+  	%>
+  	<div style="min-height:92vh;" class="d-block">
+  		<div style="position: relative;margin-right: 5px;margin-left: 18%; ">
+  			<h1>Data Err</h1>
+  		</div>
+  	</div>
+  	
+  	<%
+  	} %>
     </div>
     <footer class="bg-light text-center text-lg-start">
         <!-- Copyright -->
