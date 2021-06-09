@@ -44,8 +44,8 @@
             <!--  open only after submitting the acc no -->
             <div>
                 <div class="row mb-3">
-                    <div class="col-sm" style="margin-left:40%"><span class="h5">Acc. No<span
-                                class="textnorm">135012369</span></span></div>
+                    <div class="col-sm" style="margin-left:40%"><span class="h5">Acc. No <span
+                                class="textnorm"><% out.print(acc); %></span></span></div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-4"><span class="h4">First Name: <span class="textnorm"><% out.print(customerData.getName()); %></span></span>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="row mt-3 bg-light mx-auto">
                     <div class=" col-sm" style="margin-left:35%"><span class="h2">Balance: <span
-                                class="textnormh2">Rs.5,000.00</span></span>
+                                class="textnormh2">Rs.<% out.println(transactionDAO.totAcc(acc)); %></span></span>
                     </div>
                 </div>
                 <div class="mx-auto me-5 mt-5">
