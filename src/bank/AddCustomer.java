@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DAO.AccountDAO;
 import DAO.CustomerDAO;
 import DAO.UserDAO;
+import Model.Account;
 import Model.Customer;
 import Model.User;
 
@@ -37,12 +39,24 @@ public class AddCustomer extends HttpServlet {
 		
 		
 			CustomerDAO customerDAO = new CustomerDAO(connection);
+			AccountDAO accountDAO = new AccountDAO(connection);
+			
 			
 			
 			Customer customer = new Customer(0, request.getParameter("email"), "0000000000",request.getParameter("gender"), request.getParameter("dob"),request.getParameter("id"), request.getParameter("fname")+request.getParameter("lname"), request.getParameter("address"));
+			float amount = Float.parseFloat(request.getParameter("initialdeposit"));;
+		
+			Account account = new Account(0, request.getParameter("actype"), amount, amount, request.getParameter("id"));
 			if(customerDAO.addData(customer)){
 		    	out.println("parameters ok");
-				response.sendRedirect("manager/index.jsp");
+		    	//Create new account after adding new customer
+		    	if(accountDAO.addData(account)) {
+		    		response.sendRedirect("manager/index.jsp");
+		    	}else {
+		    		response.sendRedirect("manager/index.jsp?err=Account create failed");
+		    	}
+		    	
+				
 		    }else {
 		    	response.sendRedirect("manager/index.jsp?err=Customer adding failed");
 		    }

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpSession;
 
+import Model.Account;
 import Model.User;
 
 public class AccountDAO {
@@ -71,9 +72,9 @@ public class AccountDAO {
 	}
 	
 	
-	public boolean addData(User user) {
+	public boolean addData(Account account) {
 		PreparedStatement ps=null;
-	    String query="INSERT INTO user (id, gender, dob, email, name, nic, password, type) VALUES (NULL, '"+user.getGender()+"', '"+user.getDob()+"', '"+user.getEmail()+"', '"+user.getName()+"', '"+user.getNic()+"', '"+user.getPassword()+"', '"+user.getType()+"');";
+	    String query="INSERT INTO account (account_no, account_type, balance, initial_deposit, customer_nic) VALUES (NULL, '"+account.getAccount_type()+"', '"+account.getBalance()+"', '"+account.getBalance()+"', '"+account.getCustomer_nic()+"');";
 	    try {
 	        ps=connection.prepareStatement(query);
 	        ps.executeUpdate();
