@@ -1,3 +1,16 @@
+<%@page import="DAO.TransactionDAO"%>
+<%@page import="Model.Customer"%>
+<%@page import="DAO.AccountDAO"%>
+<%@page import="DAO.CustomerDAO"%>
+<%@ page import="bank.DB"%>
+<%@ page import="java.sql.*"%>
+<%  DB obj_DB_Connection=new DB();
+  Connection connection=null;
+  connection=obj_DB_Connection.get_connection();
+  TransactionDAO transactionDAO = new TransactionDAO(connection);
+  AccountDAO account = new AccountDAO(connection);
+  
+%>
 <!doctype html>
 <html lang="en">
 
@@ -24,7 +37,7 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center text-l">
                             <h5 class="card-title text-center">Deposits</h5>
-                            <p class="card-text fs-2">200</p>
+                            <p class="card-text fs-2"><% out.print(account.statdep()); %></p>
                         </div>
                     </div>
                 </div>
@@ -32,7 +45,7 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center">
                             <h5 class="card-title">Withdrawal</h5>
-                            <p class="card-text fs-2">150</p>
+                            <p class="card-text fs-2"><% out.print(account.statwith()); %></p>
                         </div>
                     </div>
                 </div>
@@ -53,19 +66,40 @@
                         <th>Tnx. Date</th>
                         <th>Acc. no</th>
                         <th>Amount(Cr./<span class="text-danger">Dr.</span>)</th>
+                        <th>Cashier Id</th>
                     </tr>
-                    <tr>
-                        <td>002</td>
-                        <td>2021/12/16</td>
-                        <td>01583694</td>
-                        <td class="text-danger">Rs. 250.00</td>
-                    </tr>
-                    <tr>
-                        <td>002</td>
-                        <td>2021/12/16</td>
-                        <td>01583694</td>
-                        <td>Rs. 250.00</td>
-                    </tr>
+                   <%
+								try {
+							    	ResultSet rs = transactionDAO.listLastTen();
+							    	
+									while(rs.next()) {
+										%>
+										
+												  <tr>
+							                        <td><% out.println(rs.getString("t_id")); %></td>
+							                        <td><% out.println(rs.getString("date")); %></td>
+							                        <td><% out.println(rs.getString("account_id")); %></td>
+							                        <td>Rs. <% 
+							                        	if(rs.getFloat("amount") < 0){
+							                        		%>
+							                        		<strong style="color:red"><% out.println(rs.getString("amount")); %></strong>
+							                        		<%
+							                        		
+							                        	}else{
+							                        		%>
+							                        		<strong style="color:green"><% out.println(rs.getString("amount")); %></strong>
+							                        		<%
+							                        	}
+							                        %></td>
+							                        <td><% out.println(rs.getString("user_id")); %></td>
+							                    </tr>
+										<%
+									}
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							%>
                 </table>
             </div>
         </div>
@@ -73,7 +107,7 @@
     <footer class="bg-light text-center text-lg-start">
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            Â© 2021 Copyright:
+            © 2021 Copyright:
             <a class="text-dark" href="https://combank.lk/">Com Bank</a>
         </div>
         <!-- Copyright -->

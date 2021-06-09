@@ -136,4 +136,49 @@ public class AccountDAO {
 		return false;
 		
 	}
+	
+	public int statdep() {
+		int c=0;
+		PreparedStatement ps=null;
+	    String query="SELECT SUM(amount)as a FROM transaction WHERE date=CURRENT_DATE() AND t_type=1"; //TODO
+	    try {
+	        ps=connection.prepareStatement(query);
+	        ResultSet rs=ps.executeQuery();
+	        	rs.next();
+	        	
+	        	c = rs.getInt("a");
+	        	
+	        	rs.close();
+	            return c;
+	            
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		return c;
+	}
+	
+	public int statwith() {
+		int c=0;
+		PreparedStatement ps=null;
+	    String query="SELECT SUM(amount)as a FROM transaction WHERE date=CURRENT_DATE() AND t_type=2";
+	    try {
+	        ps=connection.prepareStatement(query);
+	        ResultSet rs=ps.executeQuery();
+	        	rs.next();
+	        	
+	        	c = rs.getInt("a");
+	        	
+	        	rs.close();
+	            return c;
+	            
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		return c;
+	}
+	
+	
+	
 }
