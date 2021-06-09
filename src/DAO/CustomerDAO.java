@@ -127,4 +127,26 @@ public class CustomerDAO {
 		return false;
 		
 	}
+	
+	
+	public int totCustomers() {
+		int c=0;
+		PreparedStatement ps=null;
+	    String query="SELECT COUNT(*) as tot FROM customer;";
+	    try {
+	        ps=connection.prepareStatement(query);
+	        ResultSet rs=ps.executeQuery();
+	        	rs.next();
+	        	
+	        	c = rs.getInt("tot");
+	        	
+	        	rs.close();
+	            return c;
+	            
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		return c;
+	}
 }

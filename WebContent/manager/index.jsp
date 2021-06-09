@@ -9,7 +9,7 @@
   connection=obj_DB_Connection.get_connection();
   TransactionDAO transactionDAO = new TransactionDAO(connection);
   AccountDAO account = new AccountDAO(connection);
-  
+  CustomerDAO customerDAO = new CustomerDAO(connection);
 %>
 
 <!doctype html>
@@ -52,7 +52,7 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center">
                             <h5 class="card-title">New Customers</h5>
-                            <p class="card-text fs-2">180</p>
+                            <p class="card-text fs-2"><% out.print(customerDAO.totCustomers()); %></p>
                         </div>
                     </div>
                 </div>
