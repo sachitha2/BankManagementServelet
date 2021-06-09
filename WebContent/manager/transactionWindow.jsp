@@ -12,8 +12,9 @@
   CustomerDAO customerDAO = new CustomerDAO(connection);
   String acc = request.getParameter("acc");
   //Customer customerData = customer.GetACustomerByNIC(customerNic);
- Account account = accountDAO.accountByAccId(acc);
- 
+  Account account = accountDAO.accountByAccId(acc);
+  TransactionDAO transactionDAO = new TransactionDAO(connection);
+  
  
 %>
 
@@ -72,7 +73,7 @@
                     <div class="col-sm"><span class="h5">DOB: <span class="textnorm"><% out.println(customer.getDob()); %></span></span></div>
                     <div class="col-sm"><span class="h5">Gender: <span class="textnorm"><% out.println(customer.getGender()); %></span></span></div>
                     <div class="col-sm"><span class="h5">Acc. Type: <span class="textnorm"><% out.println(account.getAccount_type()); %></span></span></div>
-                    <div class="col-sm"><span class="h5">Email: <span class="textnorm">-</span></span></div>
+                    <div class="col-sm"><span class="h5">Email: <span class="textnorm"><% out.println(customer.getEmail()); %></span></span></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-sm"><span class="h5">Address:
@@ -85,7 +86,7 @@
 
                 <div class="row mt-3 bg-light mx-auto">
                     <div class=" col-sm" style="margin-left:35%"><span class="h2">Balance: <span
-                                class="textnormh2">Rs.5,000.00</span></span>
+                                class="textnormh2">Rs.<% out.println(transactionDAO.totAcc(acc)); %></span></span>
                     </div>
                 </div>
                 <form method="POST" action="">
