@@ -10,6 +10,7 @@
   AccountDAO account = new AccountDAO(connection);
   CustomerDAO customer = new CustomerDAO(connection);
   TransactionDAO transactionDAO = new TransactionDAO(connection);
+  String q = request.getParameter("q");
 %>
 
 <!doctype html>
@@ -34,11 +35,13 @@
     <div style="min-height:92vh;" class="d-block">
         <div style="position: relative;left: 18%; width:70%">
             <h2 class="d-flex mx-auto">Search User</h2>
-            <div class="input-group mb-3 ms-3 mt-5">
-                <input type=" text" class="form-control" placeholder="Account Number, Name, ID No"
+            <form action="" method="get">
+            	<div class="input-group mb-3 ms-3 mt-5">
+                <input type=" text" class="form-control" name="q" placeholder="Account Number, Name, ID No"
                     aria-label="Account Number" aria-describedby="button-addon2">
-                <button class="btn btn-outline-primary" type="button" id="button-addon2">🔍 Find</button>
+                <button class="btn btn-outline-primary" type="submit" id="button-addon2">🔍 Find</button>
             </div>
+            </form>
             <!--  View all before search -->
             <div>
                 <table class="table table-striped table-hover ms-4">
@@ -50,7 +53,13 @@
                     </tr>
                     <%
 								try {
-							    	ResultSet rs = account.list();
+									ResultSet rs;
+									if(q != null){
+										 
+										 rs = account.list(q);
+									}else{
+										rs = account.list("");
+									}
 							    	
 									while(rs.next()) {
 										%>

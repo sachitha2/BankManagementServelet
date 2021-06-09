@@ -20,9 +20,14 @@ public class AccountDAO {
 		this.connection = connection;
 	}
 	
-	public ResultSet  list() {
+	public ResultSet  list(String c) {
 		PreparedStatement ps=null;
-	    String query="SELECT * FROM "+table+";";
+		String query = "";
+		if(c == "") {
+			 query="SELECT * FROM account INNER JOIN customer ON account.customer_nic=customer.nic";
+		}else {
+			 query="SELECT * FROM account INNER JOIN customer ON account.customer_nic=customer.nic WHERE customer.name LIKE '%"+c+"%' or customer.nic LIKE '%"+c+"%' or account.account_no LIKE '%"+c+"%'";
+		}
 	    try {
 	        ps=connection.prepareStatement(query);
 	        ResultSet rs=ps.executeQuery();
