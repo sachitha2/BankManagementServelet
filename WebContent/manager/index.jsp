@@ -158,15 +158,15 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                               		 <form action="../CreateNewAccount" method="post" >
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-md-6 input-group">
                                                 <label for="recipient-fname" class="col-form-label">NIC Number</label>
                                                 <input type="text" class="form-control inpwidth ms-3"
-                                                    aria-describedby="receipient-id" name="fname" id="recipient-fname"
+                                                    aria-describedby="receipient-id" id="customernic" name="customernic" id="customernic"
                                                     required>
-                                                <button class="btn btn-outline-secondary" type="button"
+                                                <button class="btn btn-outline-secondary" type="button" onClick="getUserData(customernic.value)"
                                                     id="receipient-id">Search 🔍</button>
                                             </div>
 
@@ -174,15 +174,12 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label for="recipient-fname" class="col-form-label">First Name</label>
-                                                <input type="text" class="form-control inpwidth" name="fname"
-                                                    id="recipient-fname" required>
+                                                <input type="text" class="form-control inpwidth" name="fnameNewAcc"
+                                                    id="fnameNewAcc" required readonly="readonly">
                                             </div>
-                                            <div class="col-md-4 ms-auto">
-                                                <label for="recipient-name" class="col-form-label">Last Name</label>
-                                                <input type="text" class="form-control inpwidth" name="lname"
-                                                    id="recipient-name" required>
-                                            </div>
+                                            
                                         </div>
+                                        
                                         <div class="row">
                                             <div class="col-md-6 ms-auto input-group mt-3">
                                                 <label for="recipient-actype" class="col-form-label me-3">Account
@@ -190,8 +187,8 @@
                                                 <select class="form-select inpwidth" id="recipient-actype" name="actype"
                                                     required>
                                                     <option hidden>SELECT ONE</option>
-                                                    <option value="S">Savings</option>
-                                                    <option value="C">Current</option>
+                                                    <option value="Savings">Savings</option>
+                                                    <option value="Current">Current</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -208,7 +205,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary" id="createAcc">Submit</button>
                             </div>
                             </form>
                         </div>
@@ -256,6 +253,31 @@
 
 
 </body>
+<script>
+	const btn = document.getElementById('createAcc');
+	btn.disabled = true;
+	function getUserData(id){
+		if(id != ""){
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+			if (this.readyState === 4 && this.status == 200) {
+						if(this.responseText == "Err"){
+							alert('Customer not found');
+							btn.disabled = true;
+						}else{
+							btn.disabled = false;
+							document.getElementById('fnameNewAcc').value = this.responseText;
+						}
+						
+					}
+			};
+			xmlhttp.open("GET", '../GetCustomerFromNIC?id='+id, true);//generating  get method link
+			xmlhttp.send();
+		}else{
+			alert("Enter Customer NIC")
+		}
+	}
+</script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"

@@ -50,6 +50,22 @@ public class CustomerDAO {
 		return null;
 	}
 	
+	public Customer  GetACustomerByNIC(String nic) {
+		PreparedStatement ps=null;
+	    String query="SELECT * FROM "+table+"  WHERE nic LIKE '"+nic+"';";
+	    try {
+	        ps=connection.prepareStatement(query);
+	        ResultSet rs=ps.executeQuery();
+	        	rs.next();
+	        	Customer customer = new Customer(rs.getInt("id"), rs.getString("email"), rs.getString("contact"), rs.getString("gender"), rs.getString("dob"), rs.getString("nic"), rs.getString("name"), rs.getString("address"));
+	            return customer;
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		return null;
+	}
+	
 	
 	
 	
