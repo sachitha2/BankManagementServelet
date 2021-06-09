@@ -69,7 +69,7 @@
                 </div>
                 <div class="row mt-3 bg-light mx-auto">
                     <div class=" col-sm" style="margin-left:35%"><span class="h2">Balance: <span
-                                class="textnormh2">Rs.5,000.00</span></span>
+                                class="textnormh2">Rs.<% out.println(transactionDAO.totAcc(acc)); %></span></span>
                     </div>
                 </div>
                 <div class="mx-auto me-5 mt-5">

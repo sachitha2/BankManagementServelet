@@ -65,6 +65,23 @@ public class TransactionDAO {
 	    }
 		return null;
 	}
+	
+	
+	public float  totAcc(String accId) {
+		PreparedStatement ps=null;
+	    String query="SELECT SUM(amount) as tot FROM "+table+" WHERE account_id = "+accId;
+	    try {
+	        ps=connection.prepareStatement(query);
+	        ResultSet rs=ps.executeQuery();
+	        rs.next();
+	        return rs.getFloat("tot");
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		return 0;
+	}
+	
 	public Customer  GetACustomerById(String id) {
 		PreparedStatement ps=null;
 	    String query="SELECT * FROM "+table+"  WHERE id = "+id+";";
