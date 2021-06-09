@@ -89,21 +89,20 @@
                                 class="textnormh2">Rs.<% out.println(transactionDAO.totAcc(acc)); %></span></span>
                     </div>
                 </div>
-                <form method="POST" action="">
+                <form method="post" action="../MakeTransactions">
                     <!-- TODO pass here the acc no & others if needed -->
-                    <input type="hidden" name="" value="">
-                    <input type="hidden" name="" value="">
-                    <input type="hidden" name="" value="">
+                    <input type="hidden" name="acc" value="<% out.print(acc); %>">
+                    
                     <div class="row ms-5 mt-3">
                         <div class="form-check col-sm">
-                            <input class="form-check-input" type="radio" name="transaction_type" id="flexRadioDefault1"
+                            <input class="form-check-input" type="radio" name="deposit" value="deposit" id="flexRadioDefault1"
                                 checked>
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Deposit
                             </label>
                         </div>
                         <div class="form-check col-sm">
-                            <input class="form-check-input" type="radio" name="transaction_type" id="flexRadioDefault2">
+                            <input class="form-check-input" type="radio" name="deposit" value="withdraw" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault2">
                                 Withdrawal
                             </label>
@@ -151,9 +150,7 @@
         var in1 = document.getElementById('amnt1');
         var btn = document.getElementById('form-btn');
         var in2 = document.getElementById('amnt2');
-        if (in1.value.length >= 1) {
-            in1.type = "password";
-        }
+        
     }
     function disableagain() {
         var in1 = document.getElementById('amnt1');
