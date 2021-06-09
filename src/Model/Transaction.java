@@ -7,7 +7,8 @@ public class Transaction {
 	String date;
 	String time;
 	int account_id;
-	public Transaction(int t_id, int t_type, float amount, String date, String time, int account_id) {
+	String user_id;
+	public Transaction(int t_id, int t_type, float amount, String date, String time, int account_id,String user_id) {
 		super();
 		this.t_id = t_id;
 		this.t_type = t_type;
@@ -15,6 +16,7 @@ public class Transaction {
 		this.date = date;
 		this.time = time;
 		this.account_id = account_id;
+		this.user_id = user_id;
 	}
 	public int getT_id() {
 		return t_id;
@@ -51,6 +53,12 @@ public class Transaction {
 	}
 	public void setAccount_id(int account_id) {
 		this.account_id = account_id;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	
 	

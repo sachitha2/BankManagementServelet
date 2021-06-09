@@ -13,9 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import DAO.AccountDAO;
 import DAO.CustomerDAO;
+import DAO.TransactionDAO;
 import DAO.UserDAO;
 import Model.Account;
 import Model.Customer;
+import Model.Transaction;
 import Model.User;
 
 @WebServlet("/AddCustomer")
@@ -40,7 +42,7 @@ public class AddCustomer extends HttpServlet {
 		
 			CustomerDAO customerDAO = new CustomerDAO(connection);
 			AccountDAO accountDAO = new AccountDAO(connection);
-			
+			TransactionDAO transactionDAO = new TransactionDAO(connection);
 			
 			
 			Customer customer = new Customer(0, request.getParameter("email"), "0000000000",request.getParameter("gender"), request.getParameter("dob"),request.getParameter("id"), request.getParameter("fname")+request.getParameter("lname"), request.getParameter("address"));
@@ -50,8 +52,15 @@ public class AddCustomer extends HttpServlet {
 			if(customerDAO.addData(customer)){
 		    	out.println("parameters ok");
 		    	//Create new account after adding new customer
-		    	if(accountDAO.addData(account)) {
-		    		response.sendRedirect("manager/index.jsp");
+		    	int accounntId = accountDAO.addData(account);
+		    	if(accounntId != 0) {
+		    		Transaction transaction = new Transaction(0, 1, amount, "", "", accounntId, "12");
+		    		
+		    		if(transactionDAO.addData(transaction)) {
+		    			response.sendRedirect("manager/index.jsp");
+		    		}else {
+		    			response.sendRedirect("manager/index.jsp?err=Transaction failed");
+		    		}
 		    	}else {
 		    		response.sendRedirect("manager/index.jsp?err=Account create failed");
 		    	}

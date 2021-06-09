@@ -13,9 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import DAO.AccountDAO;
 import DAO.CustomerDAO;
+import DAO.TransactionDAO;
 import DAO.UserDAO;
 import Model.Account;
 import Model.Customer;
+import Model.Transaction;
 import Model.User;
 
 @WebServlet("/CreateNewAccount")
@@ -40,17 +42,26 @@ public class CreateNewAccount extends HttpServlet {
 		
 			CustomerDAO customerDAO = new CustomerDAO(connection);
 			AccountDAO accountDAO = new AccountDAO(connection);
+			TransactionDAO transactionDAO = new TransactionDAO(connection);
 			
 			
 			
 				float amount = Float.parseFloat(request.getParameter("initialdeposit"));;
 		
 				Account account = new Account(0, request.getParameter("actype"), amount, amount, request.getParameter("customernic"));
-			
-		    	
+				
+				int accounntId = accountDAO.addData(account);
+		    	 
 		    	//Create new account 
-		    	if(accountDAO.addData(account)) {
-		    		response.sendRedirect("manager/index.jsp");
+		    	if(accounntId != 0) {
+		    		Transaction transaction = new Transaction(0, 1, amount, "", "", accounntId, "12");
+		    		
+		    		if(transactionDAO.addData(transaction)) {
+		    			response.sendRedirect("manager/index.jsp");
+		    		}else {
+		    			response.sendRedirect("manager/index.jsp?err=Transaction failed");
+		    		}
+		    		
 		    	}else {
 		    		response.sendRedirect("manager/index.jsp?err=Account create failed");
 		    	}
