@@ -14,16 +14,31 @@ import Model.User;
 
 public class TransactionDAO {
 	Connection connection=null;
-	public String table = "customer";
+	public String table = "transaction";
     
 
 	public TransactionDAO(Connection connection) {
 		this.connection = connection;
 	}
 	
-	public ResultSet  customerList() {
+	public ResultSet  list() {
 		PreparedStatement ps=null;
 	    String query="SELECT * FROM "+table+";";
+	    try {
+	        ps=connection.prepareStatement(query);
+	        ResultSet rs=ps.executeQuery();
+	        
+	            return rs;
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		return null;
+	}
+	
+	public ResultSet  listLastTen() {
+		PreparedStatement ps=null;
+	    String query="SELECT * FROM "+table+" ORDER BY date and time DESC LIMIT 10";
 	    try {
 	        ps=connection.prepareStatement(query);
 	        ResultSet rs=ps.executeQuery();
