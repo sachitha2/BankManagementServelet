@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DAO.CustomerDAO;
 import DAO.UserDAO;
 import Model.Customer;
 import Model.User;
@@ -35,16 +36,15 @@ public class AddCustomer extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		
-			UserDAO userDAO = new UserDAO(connection);
+			CustomerDAO customerDAO = new CustomerDAO(connection);
 			
 			
-			User user = new User(0,"MALE","2021-01-01",request.getParameter("email"),request.getParameter("fname")+request.getParameter("lname"),"98",request.getParameter("pwd"),1);
-		    Customer customer = new Customer(0, getServletInfo(), getServletInfo(), getServletInfo(), getServletInfo(), getServletInfo(), getServletName(), getServletInfo());
-			if(userDAO.addData(user)){
+			Customer customer = new Customer(0, request.getParameter("email"), "0000000000",request.getParameter("gender"), request.getParameter("dob"),request.getParameter("id"), request.getParameter("fname")+request.getParameter("lname"), request.getParameter("address"));
+			if(customerDAO.addData(customer)){
 		    	out.println("parameters ok");
-				response.sendRedirect("manager/cashiers.jsp");
+				response.sendRedirect("manager/index.jsp");
 		    }else {
-		    	response.sendRedirect("manager/cashiers.jsp?err=Registration failed");
+		    	response.sendRedirect("manager/index.jsp?err=Customer adding failed");
 		    }
 			
 		

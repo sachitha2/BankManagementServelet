@@ -78,7 +78,7 @@ public class CustomerDAO {
 	
 	public boolean addData(Customer customer) {
 		PreparedStatement ps=null;
-	    String query="INSERT INTO customer (id, email, contact, gender, dob, nic, name, address) VALUES (NULL, 'maileka', '0715591137', 'male', '2021-06-10', '983142044v', 'sacchitha hirushan premarathna', 'address');";
+	    String query="INSERT INTO customer (id, email, contact, gender, dob, nic, name, address) VALUES (NULL, '"+customer.getEmail()+"', '"+customer.getContact()+"', '"+customer.getGender()+"', '"+customer.getDob()+"', '"+customer.getNic()+"', '"+customer.getName()+"', '"+customer.getAddress()+"');";
 	    try {
 	        ps=connection.prepareStatement(query);
 	        ps.executeUpdate();

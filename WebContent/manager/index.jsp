@@ -67,7 +67,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="../AddCustomer" method="get">
+                                <form action="../AddCustomer" method="post">
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -92,8 +92,8 @@
                                                 <select class="form-select inpwidth" id="recipient-gender" name="gender"
                                                     required>
                                                     <option hidden>SELECT ONE</option>
-                                                    <option value="m">Male</option>
-                                                    <option value="f">Female</option>
+                                                    <option value="MALE">Male</option>
+                                                    <option value="FEMALE">Female</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -113,7 +113,7 @@
                                             <div class="col-md-4">
                                                 <label for="recipient-address" class="col-form-label">Address</label>
                                                 <textarea class="form-control" id="recipient-address" name="address"
-                                                    required rows="3">Abaya Road,.&#13;&#10;Galpalama.&#13;&#10;Anuradhapura
+                                                    required rows="3">
                                                 </textarea>
                                             </div>
                                             <div class="col-md-4 ms-auto">
@@ -122,8 +122,8 @@
                                                 <select class="form-select inpwidth" id="recipient-actype" name="actype"
                                                     required>
                                                     <option hidden>SELECT ONE</option>
-                                                    <option value="S">Savings</option>
-                                                    <option value="C">Current</option>
+                                                    <option value="Savings">Savings</option>
+                                                    <option value="Current">Current</option>
                                                 </select>
                                             </div>
                                         </div>
